@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style type="text/css">
+	.vl {
+		  border-left: 1px dashed black;
+		  height:;
+</style>
+
+<div class="container pt-5" >
+	<div class="jumbotron pt-3" style="background-color: #5fc6e3;">
+		<div class="jumbotron" >
+		<p class="text-center"> License Processing Finished</p>
+		<center>
+		<div class="row">
+			<div class="col-md-5">
+				<b style="font-size: 40px";>PCO LICENSE</b>
+				{% for object in pcoContents %}
+				
+				<div>
+					<p style="font-size: 20px; color: black">Original Image</p>
+					<img src="data:image/png;base64,{{ object.pco_original_image }}" width="200">
+					<!-- <img src="data:image/png;base64,' + {{pco_original_image}} + '" width="200"/> -->
+				</div>
+				<div>
+					<br>
+                     <hr class="mr-5 ml-5">
+					<p style="font-size: 20px; color: black">Face:</p>
+					<img src="data:image/png;base64,{{ object.pco_face }}" width="100">
+					<!-- <img src="data:image/png;base64,' + {{pco_cropped_image}} + '" width="100" /> -->
+				</div>
+				<br>
+				<hr class="mr-5 ml-5">
+				<p style="font-size: 20px; color: black">Details:</p> <a href="{% url 'Edit_PCO_license' unique_id %}" class="btn btn-outline-info" style="float: right">Edit</a>
+				
+				<tr>
+				<p style="text-align: left; font-size: 14px;">Fullname: <b style="color: blue">{{object.Fullname}}</b></p>
+				<p style="text-align: left; font-size: 14px;">License Number: <b style="color: blue">{{object.License_Number}}</b></p>
+				<p style="text-align: left; font-size: 14px;">Expiry Date: <b style="color: blue">{{object.Expiry_date}}</b></p>
+				
+				<tr>
+				{% endfor %}
+				
+			</div>
+             <!-- DIVIDER -->
+			<div class="vl ml-auto mr-3">
+				
+			</div>
+             
+			<div class="col-md-5 ml-auto mr-3">
+				<b style="font-size: 40px;">DRIVING LICENSE</b>
+				{% for obj in driverContents %}
+				<div>
+					<p style="font-size: 20px; color: black">Original Image:</p>
+					<img src="data:image/png;base64,{{ obj.driver_original_image }}" width="200">
+					<!-- <img src="data:image/png;base64,' + {{driver_original_image}} + '" width="200"/> -->
+				</div>
+				<div>
+					<br>
+					<hr class="mr-5 ml-5">
+					<p style="font-size: 20px; color: black">Face:</p>
+					<img src="data:image/png;base64,{{ obj.driver_face }}" width="100">
+					<!-- <img src="data:image/png;base64,' + {{driver_cropped_image}} + '" width="100"/> -->
+				</div>
+				<br>
+				<hr class="mr-5 ml-5">
+				<p style="font-size: 20px; color: black">Details:</p> <a href="{% url 'Edit_Driving_license' unique_id %}" class="btn btn-outline-info" style="float: right">Edit</a>
+				
+				<tr>
+				<p style="text-align: left; font-size: 12px;">Fullname: <b style="color: blue">{{obj.Fullname}}</b></p>
+				<p style="text-align: left; font-size: 12px;">Date of birth: <b style="color: blue">{{obj.DOB}}</b></p>
+				<p style="text-align: left; font-size: 12px;">Place of birth: <b style="color: blue">{{obj.POB}}</b></p>
+				<p style="text-align: left; font-size: 12px;">Issued date: <b style="color: blue">{{obj.Issued_Date}}</b></p>
+				<p style="text-align: left; font-size: 12px;">Renew Date: <b style="color: blue">{{obj.Renew_Due_Date}}</b></p>
+				<p style="text-align: left; font-size: 12px;">Issuing authority: <b style="color: blue">{{obj.Issuing_authority}}</b></p>
+				<p style="text-align: left; font-size: 12px;">License Number: <b style="color: blue">{{obj.License_Number}}</b></p>
+				<p style="text-align: left; font-size: 12px;">Address: <b style="color: blue">{{obj.Address}}</b></p>
+				<p style="text-align: left; font-size: 12px;">Entitlement categories: <b style="color: blue">{{obj.Entitlement_categories}}</b></p>
+				<tr>
+				
+               {% endfor %}
+			</div>
+		</div>
+		</center>
+
+		<!-- Processed -->
+		<hr>
+		<center>
+			<div>
+				<br>
+				<p style="font-size: 20px; color: black">Compared info:</p>
+				{% for k,v in result.items %}
+				<tr>
+				<p>{{k}}: <b style="color: blue">{{v}}</b></p>
+				<tr>
+				{% endfor %}
+			</div>
+		</center>
+		
+		</div>
+	</div>
+	
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<div id="pageloader" class="text-center">
+	<br>
+	<br>
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <h1>Parsing License.....</h1>
+</div>
+
+<style type="text/css">
+	#pageloader
+{
+  background: rgba( 255, 255, 255, 0.8 );
+  display: none;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}
+</style>
+
+
+
+<style type="text/css">
+	.border{
+		width: 80vw;
+		height: 60vh;
+		background-color: #5fc6e3;
+		border-radius: 15px;
+		position: relative;
+		padding-left: 11px;
+		padding-right: 11px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.border2{
+		width: 78vw;
+		height: 56vh;
+		background-color: #8dd9f5;
+		border-radius: 15px;
+		position: absolute;
+
+	}
+	.vl {
+		  border-left: 1px dashed #f5f1f1;
+		  height: 56vh;
+		 
+		  /*border-top:1px dotted #f00;*/
+    }
+    .small_dorder{
+    	width: 100vw;
+		height: 60vh;
+		background-color: #5fc6e3;
+    }
+
+
+</style>
+
+<div style="padding-top: 30px">
+	
+</div>
+
+<center class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+	<div class="border d-none d-sm-none d-md-block d-lg-block d-xl-block" >
+		<div class="border2">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5 col-sm-12 col-lg-5 col-xm-12">
+						<p style="font-family: 'Times New Roman', serif; font-size: 30px">Upload PCO License</p>
+						<form id="myform" method="post" enctype="multipart/form-data">
+						    {% csrf_token %}
+							<p>Image of PCO License:</p>
+							<div class="custom-file mb-3">
+							  <input type="file" accept="image/*" onchange="loadFile1(event)" class="custom-file-input" id="customFile" name="filename1" required="required">
+							  <label class="custom-file-label" for="customFile">Click to Select file</label>
+							</div>
+							<script>
+						  var loadFile1 = function(event) {
+						    var output1 = document.getElementById('output1');
+						    output1.src = URL.createObjectURL(event.target.files[0]);
+						    output1.onload = function() {
+						      URL.revokeObjectURL(output1.src) // free memory
+						    }
+						  };
+						</script>
+						<p><img id="output1" height="200" /></p>
+						<!-- </form>	 -->
+					</div>
+				<!-- Divide -->
+				<div class="vl ml-auto mr-3">
+				</div>
+				<!-- End Divide -->
+				<div class="col-md-5 col-sm-12 col-lg-5 col-xm-12 ml-auto mr-3">
+					<p style="font-family: 'Times New Roman', serif; font-size: 30px">Upload Driving License</p>
+					<!-- <form action="" style="text-align: left;"> -->
+					<p>Image of Driving License:</p>
+					<div class="custom-file mb-3">
+					  <input type="file" accept="image/*" onchange="loadFile2(event)" class="custom-file-input" id="customFile" name="filename2" required="required">
+					  <label class="custom-file-label" for="customFile">Click to Select file</label>
+					</div>
+					
+					<script>
+					  var loadFile2 = function(event) {
+					    var output2 = document.getElementById('output2');
+					    output2.src = URL.createObjectURL(event.target.files[0]);
+					    output2.onload = function() {
+					      URL.revokeObjectURL(output2.src) // free memory
+					    }
+					  };
+					</script>
+					<p><img id="output2" height="200" /></p>
+				<!-- </form> -->
+				</div>
+				</div>
+
+
+			</div>
+			
+		</div>
+	</div>
+	<button type="submit" class=" btn btn-info mt-4 btn-lg"> Upload and Process</button>
+
+	</form>
+</center>
+
+<!-- 
+<p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+<p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+<p><img id="output" width="200" /></p>
+ -->
+
+
+<!-- Small Screen -->
+
+<div  class="container d-block d-sm-block d-md-none d-lg-none">
+<div class="jumbotron">
+	<div class="row d-block d-sm-block d-md-none d-lg-none">
+		<div class="col-sm-12 col-xm-12">
+			<p>Upload PCO License</p>
+
+			<form action="/" style="text-align: left;">
+				<p>Custom file:</p>
+				<div class="custom-file mb-3">
+				  <!-- <input type="file" class="custom-file-input" id="customFile" name="filename"> -->
+				  {{form.pco_license_image}}
+				  <label class="custom-file-label" for="customFile">Choose file</label>
+				</div>
+			<!-- </form>	 -->
+		</div>
+		<!-- Divide -->
+		<hr style="border-top:1px dotted #f00;">
+		<!-- End Divide -->
+		<div class="col-sm-12 col-xm-12">
+			<p>Upload Driver License</p>
+			<!-- <form action="/action_page.php" style="text-align: left;"> -->
+				<p>Custom file:</p>
+				<div class="custom-file mb-3">
+				  <!-- <input type="file" class="custom-file-input" id="customFile" name="filename"> -->
+				  {{form.driver_license_image}}
+				  <label class="custom-file-label" for="customFile">Choose file</label>
+				</div>
+			<!-- </form> -->
+			</div>
+		</div>
+	
+</div>
+
+<center>
+	<button class=" btn btn-info"> Upload and Process</button>
+</center>
+
+
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	  $("#myform").on("submit", function(){
+	    $("#pageloader").fadeIn();
+	  });//submit
+	});//document ready
+</script>
+
+
+
+{% endblock %}
